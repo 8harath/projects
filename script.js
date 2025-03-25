@@ -143,24 +143,6 @@ document.addEventListener("DOMContentLoaded", () => {
     badge.style.setProperty("--badge-index", index % 3) // Cycle through 3 delay values
   })
 
-  // Add interactive cursor effect
-  const cursor = document.createElement("div")
-  cursor.classList.add("cursor-effect")
-  document.body.appendChild(cursor)
-
-  document.addEventListener("mousemove", (e) => {
-    cursor.style.left = `${e.clientX}px`
-    cursor.style.top = `${e.clientY}px`
-
-    // Check if hovering over interactive elements
-    const isOverInteractive = e.target.closest(".project-card, .btn, #theme-button")
-    if (isOverInteractive) {
-      cursor.classList.add("cursor-expanded")
-    } else {
-      cursor.classList.remove("cursor-expanded")
-    }
-  })
-
   // Add scroll animations
   const animateOnScroll = () => {
     const elements = document.querySelectorAll(".project-card")
@@ -267,40 +249,4 @@ document.addEventListener("DOMContentLoaded", () => {
       (duration + delay) * 1000,
     )
   }
-
-  // Add CSS for cursor effect
-  const style = document.createElement("style")
-  style.textContent = `
-    .cursor-effect {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: rgba(108, 99, 255, 0.3);
-      pointer-events: none;
-      mix-blend-mode: difference;
-      transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s, background-color 0.2s;
-      z-index: 9999;
-    }
-    
-    .cursor-expanded {
-      width: 40px;
-      height: 40px;
-      background-color: rgba(108, 99, 255, 0.2);
-    }
-    
-    .project-card.in-view {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .project-card.closing .project-description {
-      opacity: 0;
-      height: 0;
-      padding-top: 0;
-    }
-  `
-  document.head.appendChild(style)
 })
-
